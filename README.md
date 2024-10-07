@@ -27,7 +27,8 @@ Initialize SQL: <BR>
 Unix client with curl: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
 2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
-3. 
+3. ```./login.sh``` there should be a ```cookies.txt``` file saved.
+4. ```./upload.sh ``` the upload should be finished moments later.
 
 Maintaince:
 1. Delete an user account: Use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```
