@@ -16,11 +16,24 @@ Optional: Modify your server configurations (e.g.: HTTP service port, SQL port, 
 Start XAMPP (lampp) by executing ```./lampp start``` under ```/opt/lampp``` directory (the following tutorial is also in this folder).
 
 Initialize SQL: <BR> 
-1. ./bin/mysql -u root -p (default password is empty, and here we use the root account to log in)
+1. ```./bin/mysql -u root -p``` (default password is empty, and here we use the root account to log in)
 2. create a database (```CREATE database_name;```) or use an existing one (in this case, ```test```)
-3. ```USE database``` (test)
-4. create tables: ```CREATE TABLE test_login (username VARCHAR(8) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(16) NOT NULL, date_created TIMESTAMP DEFAULT NOW() NOT NULL);```
+3. ```USE test```
+4. create tables: <br>
+   create test_login table for storing account information: ```CREATE TABLE test_login (username VARCHAR(8) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(16) NOT NULL, date_created TIMESTAMP DEFAULT NOW() NOT NULL);``` <br>
+   create test_user_data for storing files' information: ```CREATE TABLE test_user_data (username VARCHAR(8) NOT NULL, file_name VARCHAR(255) NOT NULL, file_path VARCHAR(255) NOT NULL, upload_time TIMESTAMP DEFAULT NOW() NOT NULL, PRIMARY KEY(username, file_name), FOREIGN KEY (username) REFERENCES test_login(username) ON DELETE CASCADE ON UPDATE RESTRICT);```
+5. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create a folder called ```disk``` under ```./htdocs/SpXFSS/``` (user uploadings will be stored here), change the privilidge of ```disk``` as 0777.
 
+Unix client with curl: 
+1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
+2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
+3. 
+
+Maintaince:
+1. Delete an user account: Use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```
+
+Caveat: This project is still in beta version, thus the security might be vunlerable. Welcome to pull contribution!
+   
 ## References:
 * https://www.w3schools.com/php/php_ref_filesystem.asp
 * https://www.apachefriends.org/faq_linux.html
