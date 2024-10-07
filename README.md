@@ -19,7 +19,7 @@ Initialize SQL: <BR>
 1. ./bin/mysql -u root -p (default password is empty, and here we use the root account to log in)
 2. create a database (```CREATE database_name;```) or use an existing one (in this case, ```test```)
 3. ```USE database``` (test)
-4. create tables: ```CREATE TABLE table_name ();```
+4. create tables: ```CREATE TABLE test_login (username VARCHAR(8) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(16) NOT NULL, date_created TIMESTAMP DEFAULT NOW() NOT NULL);```
 
 ## References:
 * https://www.w3schools.com/php/php_ref_filesystem.asp
