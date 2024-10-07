@@ -4,7 +4,7 @@
         echo "Database connected"."<br>";
 	if (isset($_POST['username']) && isset($_POST['password']) != False):
                 echo 'Logining in ...'.'<br>';  
-                $post_username = htmlspecialchars($_POST['username']);
+                $post_username = htmlspecialchars($_POST['username']); #avoid XSS
                 $post_pw = htmlspecialchars($_POST['password']);
 
                 $pwd_fetch = "SELECT password FROM test_login WHERE username=:username"; 
@@ -16,13 +16,14 @@
                 if (($fetchPW[0][0] == $_POST['password'])&&($fetchPW)):
                         $POST_user = $_POST['username'];
 			echo "Successfully signed in as $POST_user";
-			session_start();
+			session_start();	#use session to keep user's identity between pages.
 			$_SESSION['username'] = $POST_user;
 			echo "SESSION: ".$_SESSION['username']."<BR>";
-			header("Location: file_system.php");
+			header("Location: file_system.php");	#jump to other page (must before HTML codes)
 			exit();
                 else:
-                        echo "<p style=\"color:red;\">Incorrect Account/Password, Pleae try again!</p>";                
+			#echo outputs as row HTML text to user browser
+                        echo "<p style=\"color:red;\">Incorrect Account/Password, Please try again!</p>";                
 		endif;
         endif;
 ?>
