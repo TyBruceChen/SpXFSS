@@ -31,7 +31,7 @@ Unix client with curl:
 4. ```./upload.sh your_file_path``` the upload should be finished moments later. (one file upload at one time)
 
 Maintenance:
-1. Delete an user account: Use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```
+1. Delete a user account: Close the XAMPP server first, then use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```, delete the user's folder under ```disk```.
 
 Caveat: This project is still in beta version, thus the security might be vulnerable. Welcome to pull contribution!
    
