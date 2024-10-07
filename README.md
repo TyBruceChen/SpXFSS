@@ -4,6 +4,8 @@ A lightweight and easy-deployed file system server based on php and XAMPP server
 ## Why this project?
 When training AI models on Linux (Ubuntu) servers, it is often found hard to transmit the fine-tuned model back to other PCs which usually do not install with the ssh server (or other file server) for inference. Thus I decided to develop a file system that can enable cross-platform file uploading and downloading.
 
+![SpXFSS](https://github.com/user-attachments/assets/2319d13b-8264-46c3-a295-6ead07d609d5)
+
 ## Current Stage
 <b>v0_3 features</b>: login/signup, upload/download enabled for both Ubuntu and Windows. However, everyone can download your uploaded files without login. Thus do not upload your sensitive files! The login is for authorizing uploading.
 
