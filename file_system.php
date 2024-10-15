@@ -1,8 +1,8 @@
 <?php
-define("DEVELOP_MOD", False); #set this to True while in development 
+define("DEVELOP_MOD", False);
 session_start();
-if (!isset($_SESSION["username"])){	#check the status of login user
-	echo "Please login first!";
+if (!isset($_SESSION["username"])){
+	echo "<h3 style=\"color: red;\">Please login first!</h3>";
 	#header('Location: index.php');
 }
 else{
@@ -17,7 +17,7 @@ else{
 		var_dump($system_files);		
 	endif;
 
-	if (isset($_POST['submit'])){	#check for upload
+	if (isset($_POST['submit'])){	
 		if (DEVELOP_MOD == True):
 			var_dump($_FILES);
 		endif;
@@ -27,11 +27,11 @@ else{
 		header("file_system.php");
 	}
 	
-	if (isset($_POST['delete_file_name'])){	#check for file delete
-		delete_record($_POST['delete_file_name'], $pdo, $username);
+	if (isset($_POST['delete_file_name'])){
+		delete_record(basename($_POST['delete_file_name']), $pdo, $username);
 	}
 
-	if (isset($_POST['sign_out'])){		#check for sign out request
+	if (isset($_POST['sign_out'])){	
 		session_destroy();	
 	}
 }
@@ -42,11 +42,18 @@ else{
 <title>Your File System SpXFSS</title>
 </head>
 <body>
+<?php 
+	echo <<<HTMLParagraph
+
+HTMLParagraph;
+?>
 <hr><hr>
 <form actoin="" method="POST" enctype="multipart/form-data">
 <h4>Upload File: </h4>
 <input type="file" name="fileUpload" id="fileUpload">
 <input type="submit" value="Upload" name="submit">
+<br>
+There can only one file be uploaded at one time.
 </form>
 <hr>
 <form action="" method="POST">
@@ -55,7 +62,7 @@ The file's name you want to delete must match exactly with file name displayed!
 <br><input type="text" name="delete_file_name">
 </form>
 <hr><hr>
-<?php   #with the same page, different sections of php arguments are continuous
+<?php
 	if (isset($system_files)):
 		disk_display($system_files);
 	endif;
