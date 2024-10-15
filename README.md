@@ -1,5 +1,6 @@
 # SpXFSS (Simple php XAMPP File System Server)
-A lightweight and easy-deployed file system server based on php and XAMPP server for multiplatform file upload/downloading
+A lightweight and easy-deployed file system server based on php and XAMPP server for multiplatform file upload/downloading<br>
+To access the latest updates, browse the branches
 
 ## Why this project?
 When training AI models on Linux (Ubuntu) servers, it is often found hard to transmit the fine-tuned model back to other PCs which usually do not install with the ssh server (or other file server) for inference. Thus I decided to develop a file system that can enable cross-platform file uploading and downloading.
