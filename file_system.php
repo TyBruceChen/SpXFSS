@@ -42,11 +42,9 @@ else{
 <title>Your File System SpXFSS</title>
 </head>
 <body>
-<?php 
-	echo <<<HTMLParagraph
-
-HTMLParagraph;
-?>
+<?php
+	if (isset($_SESSION['username'])):
+		echo <<<HTMLParagraph
 <hr><hr>
 <form actoin="" method="POST" enctype="multipart/form-data">
 <h4>Upload File: </h4>
@@ -62,9 +60,11 @@ The file's name you want to delete must match exactly with file name displayed!
 <br><input type="text" name="delete_file_name">
 </form>
 <hr><hr>
-<?php
-	if (isset($system_files)):
-		disk_display($system_files);
+
+HTMLParagraph;
+		if (isset($system_files)):
+			disk_display($system_files);
+		endif;
 	endif;
 ?>
 <br>
