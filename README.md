@@ -12,8 +12,8 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 * [Current State](#current-stage)
 * [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-20-04)
    * [Client Usage](#unix-client-with-curl)
-* [Maintenace](#maintenance)
-* [Reference](#reference)
+   * [Maintenace](#maintenance)
+* [References](#references)
 
 ## Current Stage
 <b>v0_3 features</b>: login/signup, upload/download enabled for both Ubuntu and Windows. However, everyone can download your uploaded files without login. Thus do not upload your sensitive files! The login is for authorizing uploading.
@@ -41,7 +41,7 @@ Initialize SQL: <BR>
 3. ```./login.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
 4. ```./upload.sh your_file_path``` the upload should be finished moments later. (one file upload at one time)
 
-Maintenance:
+#### Maintenance:
 1. Delete a user account: Close the XAMPP server first, then use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```, delete the user's folder under ```disk```.
 
 Caveat: This project is still in beta version, thus the security might be vulnerable. Welcome to pull contribution!
