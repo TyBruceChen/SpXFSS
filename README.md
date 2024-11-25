@@ -22,7 +22,10 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 
 Install XAMPP to ```/opt/lampp``` from https://www.apachefriends.org/download.html (my PHP Version 8.2.12).
 
-Optional: Modify your server configurations (e.g.: HTTP service port, SQL port, development settings) in ```/opt/lampp/etc```.
+Optional: Modify your server configurations (e.g.: HTTP service port, SQL port, development settings, SSL settings for HTTPS, file transmission limitations) in ```/opt/lampp/etc```. \
+1. http port communication: default is 80, to modify it: ```etc/httpd.conf```.
+2. https port and ssl modify: default port is 443, default ssl certification location: ```etc/ssl.crt/server.crt```, default ssl private key location: ```etc/ssl.key/server.key```, to modify it: ```etc/extra/httpd-ssl.conf```. I use Aliyun's SSL which has an intermediate certificate. Thus it is required to concatenate the ssl certification (primary) with this intermediate certification to get a full-chain certification: ```cat ssl.crt chain.crt > server.key```.
+3. Maximum POST file size (transmission limitation): ```post_max_size```, variables after ```file_uploads``` in ```etc/php.ini```.
 
 Start XAMPP (lampp) by executing ```./lampp start``` under ```/opt/lampp``` directory (the following tutorial is also in this folder).
 
