@@ -10,7 +10,7 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 
 ## Category:
 * [Current State](#current-stage)
-* [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-20-04)
+* [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-2004)
    * [Client Usage](#unix-client-with-curl)
    * [Maintenace](#maintenance)
 * [References](#references)
