@@ -1,5 +1,5 @@
 <?php
-	if (isset($_POST['username'])&&isset($_POST['password'])){	#when the sign up is posted to .php file
+	if (isset($_POST['username'])&&isset($_POST['password'])){
 		include "utilizations.php";
 		$pdo = database_connection();
 		$username = htmlspecialchars($_POST['username']);
@@ -17,7 +17,6 @@
 		}catch(PDOException $e){
 			echo var_dump($e).'<br><br>';
 			if (str_contains($e->getMessage(),"Data too long for column 'username'")){
-				# to get exception information, getMessage() is used, since the raw information is a protected property
 				echo "Username is too long!";
 			}elseif (str_contains($e->getMessage(),'Duplicate entry')){
 				echo "Account already existed!/Username Used!";
