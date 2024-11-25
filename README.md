@@ -8,6 +8,12 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 ![SpXFSS](https://github.com/user-attachments/assets/2319d13b-8264-46c3-a295-6ead07d609d5)
 <img width="620" alt="image" src="https://github.com/user-attachments/assets/0d1a948b-4578-482b-be53-2d0054945230">
 
+## Category:
+* [Current State](#current-stage)
+* [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-20-04)
+   * [Client Usage](#unix-client-with-curl)
+* [Maintenace](#maintenance)
+* [Reference](#reference)
 
 ## Current Stage
 <b>v0_3 features</b>: login/signup, upload/download enabled for both Ubuntu and Windows. However, everyone can download your uploaded files without login. Thus do not upload your sensitive files! The login is for authorizing uploading.
@@ -29,7 +35,7 @@ Initialize SQL: <BR>
    create test_user_data for storing files' information: ```CREATE TABLE test_user_data (username VARCHAR(8) NOT NULL, file_name VARCHAR(255) NOT NULL, file_path VARCHAR(255) NOT NULL, upload_time TIMESTAMP DEFAULT NOW() NOT NULL, PRIMARY KEY(username, file_name), FOREIGN KEY (username) REFERENCES test_login(username) ON DELETE CASCADE ON UPDATE RESTRICT);```
 5. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create a folder called ```disk``` under ```./htdocs/SpXFSS/``` (user uploadings will be stored here), change the privilege of ```disk``` as 0777.
 
-Unix client with curl: 
+#### Unix client with curl: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
 2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
 3. ```./login.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
