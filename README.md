@@ -36,7 +36,12 @@ Initialize SQL: <BR>
 4. create tables: <br>
    create test_login table for storing account information: ```CREATE TABLE test_login (username VARCHAR(8) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(16) NOT NULL, date_created TIMESTAMP DEFAULT NOW() NOT NULL);``` <br>
    create test_user_data for storing files' information: ```CREATE TABLE test_user_data (username VARCHAR(8) NOT NULL, file_name VARCHAR(255) NOT NULL, file_path VARCHAR(255) NOT NULL, upload_time TIMESTAMP DEFAULT NOW() NOT NULL, PRIMARY KEY(username, file_name), FOREIGN KEY (username) REFERENCES test_login(username) ON DELETE CASCADE ON UPDATE RESTRICT);```
-5. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create a folder called ```disk``` under ```./htdocs/SpXFSS/``` (user uploadings will be stored here), change the privilege of ```disk``` as 0777.
+5. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create folders called ```disk``` and ```uploads``` under ```./htdocs/SpXFSS/```.
+6. change the privilege of ```disk``` and ```uploads``` as 0777. To let ```disk\``` become publicly accessible and ```uploads\``` become private (accessible only from PHP scripts), add ```.htaccess``` file in ```uploads\``` with content:
+```
+Order Allow,Deny
+Deny from all
+```
 
 #### Unix client with curl: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
