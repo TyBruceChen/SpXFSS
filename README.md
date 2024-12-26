@@ -43,11 +43,12 @@ Order Allow,Deny
 Deny from all
 ```
 
-#### Unix client with curl: 
+#### Linux client with curl: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
 2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
-3. ```./login.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
-4. ```./upload.sh your_file_path``` the upload should be finished moments later. (one file upload at one time)
+3. ```./login_*.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
+4. ```./upload_*.sh your_file_path``` the upload should be finished moments later. (one file upload at one time) <BR>
+Note: upload_private.sh and upload_public.sh provide two accessibility options for uploading.
 
 #### Maintenance:
 1. Delete a user account: Close the XAMPP server first, then use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```, delete the user's folder under ```disk```.
