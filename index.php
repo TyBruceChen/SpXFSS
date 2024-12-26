@@ -13,16 +13,21 @@
         
                 $preparedNamed->execute();
                 $fetchPW = $preparedNamed->fetchall(PDO::FETCH_NUM);
-                if (($fetchPW[0][0] == $_POST['password'])&&($fetchPW)):
+		if ($fetchPW):	
+		if (($fetchPW[0][0] == $_POST['password'])&&($fetchPW)):
                         $POST_user = $_POST['username'];
 			echo "Successfully signed in as $POST_user";
+
 			session_start();
-			$_SESSION['username'] = $POST_user;
-			echo "SESSION: ".$_SESSION['username']."<BR>";
+			$_SESSION['SpXFSS']['username'] = $POST_user;
+			echo "SESSION: ".$_SESSION['SpXFSS']['username']."<BR>";
 			header("Location: file_system.php");
 			exit();
                 else:
                         echo "<p style=\"color:red;\">Incorrect Account/Password, Pleae try again!</p>";                
+		endif;
+		else:
+		echo "<p style=\"color:red;\">Incorrect Account/Password, Pleae try again!</p>";
 		endif;
         endif;
 ?>
@@ -34,8 +39,10 @@
 <body>
 <h1>SpXFSS</h1>
 	<form action="", method="POST">
+		<p style='color:green;'>Username (ID):</p>
 		<input type='text', name="username", value="">	
-		<input type='text', name="password", value="">
+		<p style='color:green;'>Password</p>
+		<input type='password', name="password", value="">
 		<input type='submit', value='Sign In'>
 	</form>
 <h5>If you do not have account, <a href="sign_up.php">sign up</a> for one.</h5>
@@ -45,8 +52,11 @@
 	caveat_0();
 ?>
 
-<p>See others' disk without uploading: <a href='disk/'>click here</a>.</p>
+<p>To access public disk without login: <a href='disk/'>click here</a>.</p>
 
+<br>
+<a href="../index.php">Main Page</a>
+<br><br>
 <?php 
 	copyright();
 ?>

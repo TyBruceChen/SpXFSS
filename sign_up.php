@@ -12,8 +12,8 @@
 		try{
 			$preparedNamed->execute();
 			echo "<p>Account <b style=\"color:green;\">".$username."</b> has created.</p>";
-                echo "<p>Click <a href=\"index.php\">here</a> to go back to continue sign-in.</p>";
-		mkdir_user($username);
+       		         echo "<p>Click <a href=\"index.php\">here</a> to go back to continue sign-in.</p>";
+			mkdir_user($username);
 		}catch(PDOException $e){
 			echo var_dump($e).'<br><br>';
 			if (str_contains($e->getMessage(),"Data too long for column 'username'")){
@@ -21,7 +21,7 @@
 			}elseif (str_contains($e->getMessage(),'Duplicate entry')){
 				echo "Account already existed!/Username Used!";
 			}
-			echo "<br> Error!";
+			echo "<p style='color:red;'><br> Error! (try to contact with developer or register with another id)</p>";
 		}	
 	}
 ?>
@@ -36,9 +36,11 @@
 Your Username:
 <input type="text", name="username"><br>
 Setup Your Password:
-<input type="text", name="password"><br>
+<input type="password", name="password"><br>
 <input type="submit", value="Sign Up">
 </form>
+
+<p><a href="index.php">Go back</a></p>
 <?php
 	include "inform.php";
 	copyright();

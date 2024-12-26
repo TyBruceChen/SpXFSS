@@ -1,6 +1,6 @@
 <?php 
 function caveat_0(){
-	echo "<br><br><h2 style=\"color:red;text-align:center\">Caveat & Disclaim! Your uploads can be accessed by public for current stage.<br>Thus do not upload your sensitive data!!</h2>";
+	echo "<br><br><h3 style=\"color:red;text-align:center\">Caveat & Disclaim! Do not upload your sensitive data!!</h3>";
 }
 
 function copyright(){
