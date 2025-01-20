@@ -59,3 +59,4 @@ Caveat: This project is still in beta version, thus the security might be vulner
 * https://www.w3schools.com/php/php_ref_filesystem.asp
 * https://www.apachefriends.org/faq_linux.html
 * https://learncodingfast.com/php/
+* Understand MIME type (multipurpose internet mail extensions) used in file tranfer: https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types
