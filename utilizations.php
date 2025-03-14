@@ -52,7 +52,7 @@ function disk_display(array $files_info, string $disk_link = 'disk/'){
 		$file_name = $file_info['file_name'];
 		$file_path = $file_info['file_path'];
 		echo "<a target='_blank' href='download.php?file=".urlencode($file_path)."'>".htmlspecialchars($file_name)."</a><br>";	
-		
+		#call function at download.php when the download link is clicked
 	}
 	echo "<br>click the link below to jump to your public files";
 	echo "<br><b><a href=\"$disk_link$username/\">Your Public Disk</a></b>";
@@ -79,7 +79,7 @@ function match_file_download($pdo, string $username, string $file_path, string $
 function delete_record(string $file_name, $pdo, string $username, string $table_name = 'test_user_data'){
 	$files_info = select_fileInfo($username, $pdo);
 	$file_exist = False;
-	#check for existance
+	#check for existence
 	foreach ($files_info as $file_info){
 		if ($file_name == $file_info['file_name']):
 			$file_exist = True;
