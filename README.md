@@ -5,8 +5,11 @@ To access the latest updates, browse the branches
 ## Why this project?
 When training AI models on Linux (Ubuntu) servers, it is often found hard to transmit the fine-tuned model back to other PCs which usually do not install with the ssh server (or other file server) for inference. Thus I decided to develop a file system that can enable cross-platform file uploading and downloading. Most importantly, easy-to-deploy and free.
 
+![SpXFSS_v1](https://github.com/user-attachments/assets/c82b7d20-2e47-4bef-9cb3-00cdfea4d349)
 ![SpXFSS](https://github.com/user-attachments/assets/2319d13b-8264-46c3-a295-6ead07d609d5)
 <img width="620" alt="image" src="https://github.com/user-attachments/assets/0d1a948b-4578-482b-be53-2d0054945230">
+
+
 
 ## Category:
 * [Current State](#current-stage)
