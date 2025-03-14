@@ -1,12 +1,12 @@
 <?php
 define("DEVELOP_MOD", False);
 session_start();
-if (!isset($_SESSION["username"])){
+if (!isset($_SESSION['SpXFSS']["username"])){
 	echo "<h3 style=\"color: red;\">Please login first!</h3>";
 	#header('Location: index.php');
 }
 else{
-	$username = $_SESSION["username"];
+	$username = $_SESSION['SpXFSS']["username"];
 	echo "<h1>Signed in as <b style=\"color:blue;\">$username</b></h1>";
 	echo "<br><p>Login time: " .date('c', strtotime("+ 6 hours"))."</p>";
  	echo "<br>Note: If you're uploading your file for your account for the first time, please refresh the page to see your uploaded files.";	
@@ -21,18 +21,24 @@ else{
 		if (DEVELOP_MOD == True):
 			var_dump($_FILES);
 		endif;
-
-		$dst_file_path = handle_upload($_FILES["fileUpload"]["tmp_name"], $_FILES["fileUpload"]['name'], $username);
-		archieve_file($username, $pdo, $file_name = $_FILES["fileUpload"]['name'], $file_path = $dst_file_path);
-		header("file_system.php");
+		if ($_POST['upload_type'] == 'private'):
+			$upload_folder = 'uploads';	#only the user can get access ('uploads/')
+		else:
+			$upload_folder = 'disk';	#anyone can get access ('disk/')
+		endif;
+		$dst_file_path = handle_upload($_FILES["fileUpload"]["tmp_name"], $_FILES["fileUpload"]['name'], $username, $upload_folder);
+		archieve_file($username, $pdo, $file_name = $_FILES["fileUpload"]['name'], $file_path = $dst_file_path);	
+		header("Location: file_system.php");
 	}
 	
 	if (isset($_POST['delete_file_name'])){
 		delete_record(basename($_POST['delete_file_name']), $pdo, $username);
+		header("Location: file_system.php");
 	}
 
 	if (isset($_POST['sign_out'])){	
 		session_destroy();	
+		header('Location: file_system.php');
 	}
 }
 ?>
@@ -43,16 +49,22 @@ else{
 </head>
 <body>
 <?php
-	if (isset($_SESSION['username'])):
+	if (isset($_SESSION['SpXFSS']['username'])):
 		echo <<<HTMLParagraph
 <hr><hr>
 <form actoin="" method="POST" enctype="multipart/form-data">
 <h4>Upload File: </h4>
 <input type="file" name="fileUpload" id="fileUpload">
+Accessibility: 
+<input type="radio" name="upload_type" value="private" checked="checked">Private
+<input type="radio" name="upload_type" value="public">Public
+<br>
 <input type="submit" value="Upload" name="submit">
 <br>
 There can only one file be uploaded at one time.
 </form>
+HTMLParagraph;
+		echo <<<HTMLParagraph
 <hr>
 <form action="" method="POST">
 <h4>Delete File: </h4>
@@ -70,7 +82,7 @@ HTMLParagraph;
 <br>
 <a href='index.php'>Go back</a>
 <?php
-	if (isset($_SESSION["username"])):
+	if (isset($_SESSION['SpXFSS']["username"])):
 		#sign out button:	
 		echo "<br><br><form action='' method='POST'><input type='submit' name='sign_out' value='Sign out'></form>";
 	endif;

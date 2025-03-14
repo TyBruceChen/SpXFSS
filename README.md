@@ -5,7 +5,8 @@ To access the latest updates, browse the branches
 ## Why this project?
 When training AI models on Linux (Ubuntu) servers, it is often found hard to transmit the fine-tuned model back to other PCs which usually do not install with the ssh server (or other file server) for inference. Thus I decided to develop a file system that can enable cross-platform file uploading and downloading. Most importantly, easy-to-deploy and free.
 
-![SpXFSS_v1](https://github.com/user-attachments/assets/c82b7d20-2e47-4bef-9cb3-00cdfea4d349)
+
+![SpXFSS_v1](https://github.com/user-attachments/assets/8dee0293-25f5-4436-8e96-97190e163154)
 ![SpXFSS](https://github.com/user-attachments/assets/2319d13b-8264-46c3-a295-6ead07d609d5)
 <img width="620" alt="image" src="https://github.com/user-attachments/assets/0d1a948b-4578-482b-be53-2d0054945230">
 
@@ -14,11 +15,12 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 ## Category:
 * [Current State](#current-stage)
 * [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-2004)
-   * [Client Usage](#unix-client-with-curl)
+   * [Client Usage](#command-line-client)
    * [Maintenace](#maintenance)
 * [References](#references)
 
 ## Current Stage
+<b>v1 features</b>: version 1 has been published, which supports account sign-up, sign-in, file-uploading & downloading in two selectable accessibilities (private (login-required) or public (without authorization)). The prompt (client) for command line resides in the folder ```curl_client```. (2025-03-14) \
 <b>v0_3 features</b>: login/signup, upload/download enabled for both Ubuntu and Windows. However, everyone can download your uploaded files without login. Thus do not upload your sensitive files! The login is for authorizing uploading.
 
 ## Get Started (Ubuntu 20.04)
@@ -39,13 +41,19 @@ Initialize SQL: <BR>
 4. create tables: <br>
    create test_login table for storing account information: ```CREATE TABLE test_login (username VARCHAR(8) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(16) NOT NULL, date_created TIMESTAMP DEFAULT NOW() NOT NULL);``` <br>
    create test_user_data for storing files' information: ```CREATE TABLE test_user_data (username VARCHAR(8) NOT NULL, file_name VARCHAR(255) NOT NULL, file_path VARCHAR(255) NOT NULL, upload_time TIMESTAMP DEFAULT NOW() NOT NULL, PRIMARY KEY(username, file_name), FOREIGN KEY (username) REFERENCES test_login(username) ON DELETE CASCADE ON UPDATE RESTRICT);```
-5. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create a folder called ```disk``` under ```./htdocs/SpXFSS/``` (user uploadings will be stored here), change the privilege of ```disk``` as 0777.
+5. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create folders called ```disk``` and ```uploads``` under ```./htdocs/SpXFSS/```.
+6. change the privilege of ```disk``` and ```uploads``` as 0777. To let ```disk\``` become publicly accessible and ```uploads\``` become private (accessible only from PHP scripts), add ```.htaccess``` file in ```uploads\``` with content:
+```
+Order Allow,Deny
+Deny from all
+```
 
-#### Unix client with curl: 
+#### Command line client: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
 2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
-3. ```./login.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
-4. ```./upload.sh your_file_path``` the upload should be finished moments later. (one file upload at one time)
+3. ```./login_*.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
+4. ```./upload_*.sh your_file_path``` the upload should be finished moments later. (one file upload at one time) <BR>
+Note: upload_private.sh and upload_public.sh provide two accessibility options for uploading.
 
 #### Maintenance:
 1. Delete a user account: Close the XAMPP server first, then use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```, delete the user's folder under ```disk```.
@@ -56,3 +64,4 @@ Caveat: This project is still in beta version, thus the security might be vulner
 * https://www.w3schools.com/php/php_ref_filesystem.asp
 * https://www.apachefriends.org/faq_linux.html
 * https://learncodingfast.com/php/
+* Understand MIME type (multipurpose internet mail extensions) used in file tranfer: https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types
