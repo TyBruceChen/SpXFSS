@@ -12,11 +12,12 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 ## Category:
 * [Current State](#current-stage)
 * [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-2004)
-   * [Client Usage](#unix-client-with-curl)
+   * [Client Usage](#command-line-client)
    * [Maintenace](#maintenance)
 * [References](#references)
 
 ## Current Stage
+<b>v1 features</b>: version 1 has been published, which supports account sign-up, sign-in, file-uploading & downloading in two selectable accessibilities (private (login-required) or public (without authorization)). The prompt (client) for command line resides in the folder ```curl_client```. (2025-03-14) \
 <b>v0_3 features</b>: login/signup, upload/download enabled for both Ubuntu and Windows. However, everyone can download your uploaded files without login. Thus do not upload your sensitive files! The login is for authorizing uploading.
 
 ## Get Started (Ubuntu 20.04)
@@ -44,7 +45,7 @@ Order Allow,Deny
 Deny from all
 ```
 
-#### Linux client with curl: 
+#### Command line client: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
 2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
 3. ```./login_*.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
