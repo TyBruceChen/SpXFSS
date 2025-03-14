@@ -13,8 +13,7 @@
         
                 $preparedNamed->execute();
                 $fetchPW = $preparedNamed->fetchall(PDO::FETCH_NUM);
-		if ($fetchPW):	
-		if (($fetchPW[0][0] == $_POST['password'])&&($fetchPW)):
+                if (($fetchPW[0][0] == $_POST['password'])&&($fetchPW)):
                         $POST_user = $_POST['username'];
 			echo "Successfully signed in as $POST_user";
 
@@ -25,9 +24,6 @@
 			exit();
                 else:
                         echo "<p style=\"color:red;\">Incorrect Account/Password, Pleae try again!</p>";                
-		endif;
-		else:
-		echo "<p style=\"color:red;\">Incorrect Account/Password, Pleae try again!</p>";
 		endif;
         endif;
 ?>
@@ -42,7 +38,7 @@
 		<p style='color:green;'>Username (ID):</p>
 		<input type='text', name="username", value="">	
 		<p style='color:green;'>Password</p>
-		<input type='password', name="password", value="">
+		<input type='text', name="password", value="">
 		<input type='submit', value='Sign In'>
 	</form>
 <h5>If you do not have account, <a href="sign_up.php">sign up</a> for one.</h5>

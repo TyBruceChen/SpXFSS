@@ -9,7 +9,7 @@ else{
 	$username = $_SESSION['SpXFSS']["username"];
 	echo "<h1>Signed in as <b style=\"color:blue;\">$username</b></h1>";
 	echo "<br><p>Login time: " .date('c', strtotime("+ 6 hours"))."</p>";
- 	echo "<br>Note: This file system allows uploading files in two types of modes: <b>Private</b> (default): only you can view this uploaded file; <b>Public</b>: anyone can access this uploaded file without loging in. Stay sharp!";	
+ 	echo "<br>Note: If you're uploading your file for your account for the first time, please refresh the page to see your uploaded files.";	
 	include "utilizations.php";
 	$pdo = database_connection();
 	$system_files = select_fileInfo($username,$pdo);
@@ -61,7 +61,7 @@ Accessibility:
 <br>
 <input type="submit" value="Upload" name="submit">
 <br>
-There is only one file allowed to upload at one time.
+There can only one file be uploaded at one time.
 </form>
 HTMLParagraph;
 		echo <<<HTMLParagraph
