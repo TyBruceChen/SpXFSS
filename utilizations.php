@@ -44,7 +44,7 @@ function select_fileInfo(string $username,$pdo, string $table_name = 'test_user_
 }
 
 function disk_display(array $files_info, string $disk_link = 'disk/'){
-	echo "<h4>Your Files:</h4>";	
+	echo "<h4>Your Files (Public + Private):</h4>";	
 	if ($files_info):
 	foreach ($files_info as $file_info){
 		$upload_time = $file_info['upload_time'];
