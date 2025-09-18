@@ -58,7 +58,7 @@ Deny from all
 * Check the issued key pairs by ```ls /etc/letsencrypt/live/your_domain/``` ls  and move the full-chain cert and private key to ```etc/ssl.key/``` and ```etc/ssl.crt/``` respectively.
 * Configure the XAMPP server SSL settings at ```etc/extra/httpd-ssl.conf``` to make sure ```SSLEngine on```, ```SSLCertificateFile``` and ```SSLCertificateKeyFile``` specify the correct locations.
 
-10. Make sure the forwarding port that is accessed by users is at ```443```.
+10. Make sure the forwarding port (https://your_domain) that is accessed by users is at ```443```.
 
 #### Command line client: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
