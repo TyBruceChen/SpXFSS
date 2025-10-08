@@ -38,7 +38,7 @@
 		<p style='color:green;'>Username (ID):</p>
 		<input type='text', name="username", value="">	
 		<p style='color:green;'>Password</p>
-		<input type='text', name="password", value="">
+		<input type='password', name="password", value="">
 		<input type='submit', value='Sign In'>
 	</form>
 <h5>If you do not have account, <a href="sign_up.php">sign up</a> for one.</h5>
