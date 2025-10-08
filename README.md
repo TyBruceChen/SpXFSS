@@ -15,11 +15,16 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 ## Category:
 * [Current State](#current-stage)
 * [Get Started (Server) (Ubuntu 20.04)](#get-started-ubuntu-2004)
-   * [Client Usage](#command-line-client)
-   * [Maintenace](#maintenance)
+   * [Basic Server Setup](#basic-server-setup)
+   * [SQL Initialization](#initialize-sql)
+   * [Storage Setup](#storage-setup)
+   * [HTTPS configuration](#https-setup)
+* [Client Usage](#command-line-client)
+* [Maintenace](#maintenance)
 * [References](#references)
 
 ## Current Stage
+<b>2025-07-10</b>: HTPPS protocol configuration enabled.
 <b>v1 features</b>: version 1 has been published, which supports account sign-up, sign-in, file-uploading & downloading in two selectable accessibilities (private (login-required) or public (without authorization)). The prompt (client) for command line resides in the folder ```curl_client```. (2025-03-14) \
 <b>v0_3 features</b>: login/signup, upload/download enabled for both Ubuntu and Windows. However, everyone can download your uploaded files without login. Thus do not upload your sensitive files! The login is for authorizing uploading.
 
@@ -27,9 +32,10 @@ When training AI models on Linux (Ubuntu) servers, it is often found hard to tra
 
 Install XAMPP to ```/opt/lampp``` from https://www.apachefriends.org/download.html (my PHP Version 8.2.12).
 
+#### Basic Server Setup
 Optional: Modify your server configurations (e.g.: HTTP service port, SQL port, development settings, SSL settings for HTTPS, file transmission limitations) in ```/opt/lampp/etc```. 
 1. http port communication: default is 80, to modify it: ```etc/httpd.conf```.
-2. https port and ssl modify: default port is 443, default ssl certification location: ```etc/ssl.crt/server.crt```, default ssl private key location: ```etc/ssl.key/server.key```, to modify it: ```etc/extra/httpd-ssl.conf```. I use Aliyun's SSL which has an intermediate certificate. Thus it is required to concatenate the ssl certification (primary) with this intermediate certification to get a full-chain certification: ```cat ssl.crt chain.crt > server.key```.
+2. https port and ssl modify: default port is 443, default ssl certification location: ```etc/ssl.crt/server.crt```, default ssl private key location: ```etc/ssl.key/server.key```, to modify it: ```etc/extra/httpd-ssl.conf```. <del>I use Aliyun's SSL which has an intermediate certificate. Thus it is required to concatenate the ssl certification (primary) with this intermediate certification to get a full-chain certification: ```cat ssl.crt chain.crt > server.key```.</del>
 3. Maximum POST file size (transmission limitation): ```post_max_size```, variables after ```file_uploads``` in ```etc/php.ini```, other parameters may influence:
 ```
 ; must be >= upload_max_filesize
@@ -48,7 +54,7 @@ max_file_uploads = 50
 
 Start XAMPP (lampp) by executing ```./lampp start``` under ```/opt/lampp``` directory (the following tutorial is also in this folder).
 
-Initialize SQL: <BR> 
+#### Initialize SQL
 1. ```./bin/mysql -u root -p``` (default password is empty, and here we use the root account to log in)
 2. create a database (```CREATE database_name;```) or use an existing one (in this case, ```test```)
 3. ```USE test```
@@ -61,12 +67,15 @@ CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'mypassword';  #'newuser' -> 'la
 GRANT ALL PRIVILEGES ON your_db.* TO 'newuser'@'localhost';  #'your_db' -> 'test'
 FLUSH PRIVILEGES;
 ```
+
+#### Storage Setup
 7. copy this repository content end with ```*.php``` under ```./htdocs``` folder as ```SpXFSS```, and create folders called ```disk``` and ```uploads``` under ```./htdocs/SpXFSS/```.
 8. change the privilege of ```disk``` and ```uploads``` as 0777. To let ```disk\``` become publicly accessible and ```uploads\``` become private (accessible only from PHP scripts), add ```.htaccess``` file in ```uploads\``` with content:
 ```
 Order Allow,Deny
 Deny from all
 ```
+#### HTTPS Setup
 9. Configure the TLS/SSL license for HTTPS access:
 * Request [Let's Encrypt](https://letsencrypt.org/) server by using [Certbot](https://certbot.eff.org/) toolkit: ```certbot certonly --standalone -d [your_domain] -d [www.your_domain]```, while making sure port ```80``` is available for this connection. ```your_domain``` should match the domain name when external users access.
 * Check the issued key pairs by ```ls /etc/letsencrypt/live/your_domain/``` ls  and move the full-chain cert and private key to ```etc/ssl.key/``` and ```etc/ssl.crt/``` respectively.
@@ -74,14 +83,14 @@ Deny from all
 
 10. Make sure the forwarding port (https://your_domain) that is accessed by users is at ```443```.
 
-#### Command line client: 
+## Command line client: 
 1. For your own server, remember to modify ```*URL``` value in ```*.sh``` files to your URL.
 2. make ```*.sh``` executable by ```chmod +x *.sh``` in your client folder.
 3. ```./login_*.sh your_username your_password``` there should be a ```cookies.txt``` file saved.
 4. ```./upload_*.sh your_file_path``` the upload should be finished moments later. (one file upload at one time) <BR>
 Note: upload_private.sh and upload_public.sh provide two accessibility options for uploading.
 
-#### Maintenance:
+## Maintenance:
 1. Delete a user account: Close the XAMPP server first, then use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```, delete the user's folder under ```disk```.
 
 Caveat: This project is still in beta version, thus the security might be vulnerable. Welcome to pull contribution!
