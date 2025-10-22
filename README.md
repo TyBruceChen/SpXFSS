@@ -90,7 +90,7 @@ Note: upload_private.sh and upload_public.sh provide two accessibility options f
 
 ## Maintenance:
 1. Delete a user account: Close the XAMPP server first, then use the ```test``` database as mentioned above, ```DELETE FROM test_login WHERE username='xxx';```, delete the user's folder under ```disk```.
-
+2. If the server fails to access a file, check the permissions of the folder, usually it should be allow access by ```daemon``` by default. To change it: ```chown -R daemon:daemon /path/to/your/folder```.
 Caveat: This project is still in beta version, thus the security might be vulnerable. Welcome to pull contribution!
    
 ## References:
