@@ -1,0 +1,10 @@
+Linux uploading client
+
+Before use, replace the URL link with your server's domain name. 
+Also, under the same folder: chmod +x *.sh to make them executable.
+
+How to use:
+1. ./login.sh [username] [password]
+2. Check the return message contains "successfully logged in", and make sure cookies.txt resides in the same directory as other scripts.
+3. To upload a file in private/public: ```./upload_(private/public).sh [the_file_path]```
+4. To download a private file: ```./download_private [the_download_link]```. To download a public one, just: ```wget [link]```.
